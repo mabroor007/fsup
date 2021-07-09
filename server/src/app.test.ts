@@ -1,5 +1,6 @@
-import io from "./app";
+import FsupServer from "./app";
 import SocketIo from "socket.io";
+import SocketHandler from "./SocketHandler";
 import Client, { Socket } from "socket.io-client";
 
 const PORT = process.env.PORT || 4000;
@@ -7,6 +8,7 @@ const HOST = process.env.HOST || "localhost";
 
 describe("my awesome project", () => {
   let server: SocketIo.Socket, client: Socket;
+  let io = new FsupServer(SocketHandler).getIo();
 
   beforeAll((done) => {
     io.on("connection", (socket) => {

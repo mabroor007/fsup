@@ -1,0 +1,26 @@
+version: "3"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PORT: 4000
+      ARANGO_ROOT_PASSWORD: pwd
+      DB_HOST: db
+      DB_PORT: 8529
+      DB_USERNAME: root
+      DB_PASSWORD: pwd
+    ports:
+      - "4000:4000"
+
+  db:
+    image: arangodb:latest
+    environment:
+      ARANGO_ROOT_PASSWORD: pwd
+
+    volumes:
+      - db:/var/lib/arangodb3
+
+volumes:
+  db:
